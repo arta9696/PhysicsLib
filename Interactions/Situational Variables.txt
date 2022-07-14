@@ -1,0 +1,2 @@
+﻿Linear_Speed_of_Rotation - v = 2*PI*R*Freq, where R is distans from rotation center
+Centripetal acceleration - a = (Lin_Sp_of_Rot^2)/R = 4*(Pi^2)*R*Freq^2, where R is distans from rotation center
