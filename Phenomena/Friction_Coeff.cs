@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace PhysicsLib.Phenomena
 {
-    public class Material_Resistance : Component
+    public class Friction_Coeff : Component
     {
-        double mat_res;
-        public Material_Resistance(double material_resistance) : base(true)
+        double frict_coeff;
+        public Friction_Coeff(double frict_coeff) : base(true)
         {
-            mat_res = material_resistance;
+            this.frict_coeff = frict_coeff;
         }
 
         protected override void SupportAddAction()
         {
-            obj.Double_variables.Add(Component_name, mat_res);
+            obj.Double_variables.Add(Component_name, frict_coeff);
         }
 
         protected override void SupportRemoveAction()

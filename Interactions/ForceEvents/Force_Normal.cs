@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace PhysicsLib.Interactions.ForceEvents
 {
-    internal class Force_Normal : Force_Arbitrary
+    public class Force_Normal : Force_Arbitrary
     {
         public MathVector Action(PsObject a, PsObject b, params object[] additional_values)
         {
-            double t = ((a.Vector_variables["Position"] + a.Vector_variables["Velocity"]) - (b.Vector_variables["Position"] + b.Vector_variables["Velocity"])).Length() - (double)additional_values[0];
-            return new MathVector(a.Vector_variables["Position"][0] - b.Vector_variables["Position"][0], a.Vector_variables["Position"][1] - b.Vector_variables["Position"][1]) * t * a.Double_variables["Material_Resistance"];
+            var cos = (b.Vector_variables["Position"] - a.Vector_variables["Position"]).NormalizedVersion() * b.Vector_variables["Velocity"].NormalizedVersion();
+            MathVector speed_into_obj = b.Vector_variables["Velocity"]*cos;
+            var delta = b.Double_variables["Margin_of_force"] - (b.Vector_variables["Position"] - a.Vector_variables["Position"]).Length();
+            return -speed_into_obj * a.Double_variables["Mass"] * (delta*delta);
         }
     }
 }

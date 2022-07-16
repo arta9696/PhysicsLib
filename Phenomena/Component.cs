@@ -34,6 +34,7 @@ namespace PhysicsLib.Phenomena
             if (isOneTimer)
             {
                 Thread ot = new Thread(() => Action());
+                ot.IsBackground = true;
                 ot.Start();
                 return;
             }
@@ -43,6 +44,7 @@ namespace PhysicsLib.Phenomena
 
                 Thread mt = new Thread(() => ThreadInsider());
                 mt.Name = Component_name;
+                mt.IsBackground = true;
                 mt.Start();
             }
         }
@@ -90,6 +92,7 @@ namespace PhysicsLib.Phenomena
                 Console.WriteLine(sleep + " - " + sw.ElapsedMilliseconds + "-" + component_name);
                 sw.Reset();
             }
+            
         }
         protected virtual void Action()
         {

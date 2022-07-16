@@ -12,6 +12,7 @@ namespace PhysicsLib.Objects
         private Dictionary<string, object> variables = new Dictionary<string, object>();
         private Dictionary<string, double> double_variables = new Dictionary<string, double>();
         private Dictionary<string, MathVector> vector_variables = new Dictionary<string, MathVector>();
+        private List<PsObject> objectPool;
 
         public bool IsActive { get => isActive; }
         public string Object_name { get => object_name; }
@@ -20,10 +21,12 @@ namespace PhysicsLib.Objects
         public Dictionary<string, double> Double_variables { get => double_variables; set => double_variables = value; }
         public Dictionary<string, MathVector> Vector_variables { get => vector_variables; set => vector_variables = value; }
 
-        public PsObject(string object_name, int milisec_delay)
+        public PsObject(string object_name, int milisec_delay, List<PsObject> objectPool)
         {
             this.object_name = object_name;
             this.milisec_delay = milisec_delay;
+            this.objectPool = objectPool;
+            objectPool.Add(this);
         }
 
         public void AddComponent(Component component)

@@ -10,11 +10,11 @@ namespace PhysicsLib.Phenomena.Dinamics
 {
     public class ForceAdder: Component
     {
-        PsObject[] all_objects;
+        List<PsObject> all_objects;
         double e = double.PositiveInfinity;
         Force_Arbitrary force;
         Force_Everywhere force_everywhere;
-        public ForceAdder(Force_Arbitrary force, double margin_from_effect, params PsObject[] all_objects) : base(false)
+        public ForceAdder(Force_Arbitrary force, double margin_from_effect, List<PsObject> all_objects) : base(false)
         {
             this.all_objects = all_objects;
             e = margin_from_effect;
@@ -62,6 +62,7 @@ namespace PhysicsLib.Phenomena.Dinamics
             if (!double.IsInfinity(e))
             {
                 obj.Variables.Add(force.GetType().Name, force);
+                obj.Double_variables.Add("Margin_of_force", e);
             }
         }
 
@@ -70,6 +71,7 @@ namespace PhysicsLib.Phenomena.Dinamics
             if (!double.IsInfinity(e))
             {
                 obj.Variables.Remove(force.GetType().Name);
+                obj.Double_variables.Remove("Margin_of_force");
             }
         }
     }
