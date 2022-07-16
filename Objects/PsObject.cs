@@ -58,72 +58,79 @@ namespace PhysicsLib.Objects
 
         public override string? ToString()
         {
-            string one = Object_name + (isActive ? " is active " : " is not active ") + "and have " + milisec_delay.ToString() + " milliseccond delay";
-            StringBuilder builder = new StringBuilder();
-            for(int i = 0; i < one.Length + 4; i++)
+            try
             {
-                builder.Append("-");
-            }
-            builder.AppendLine("\n||" + one + "||");
-            string two = "||As additional variables it have:";
-            builder.Append(two);
-            for (int i = two.Length; i < one.Length + 2; i++)
-            {
-                builder.Append(" ");
-            }
-            builder.Append("||\n");
-            foreach (string i in variables.Keys)
-            {
-                string vars = $"||-{i} - {variables.GetValueOrDefault(i).ToString()}";
-                builder.Append(vars);
-                for (int j = vars.Length; j < one.Length + 2; j++)
+                string one = Object_name + (isActive ? " is active " : " is not active ") + "and have " + milisec_delay.ToString() + " milliseccond delay";
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < one.Length + 4; i++)
+                {
+                    builder.Append("-");
+                }
+                builder.AppendLine("\n||" + one + "||");
+                string two = "||As additional variables it have:";
+                builder.Append(two);
+                for (int i = two.Length; i < one.Length + 2; i++)
                 {
                     builder.Append(" ");
                 }
                 builder.Append("||\n");
-            }
-            foreach (string i in double_variables.Keys)
-            {
-                string vars = $"||-{i} - {double_variables.GetValueOrDefault(i).ToString()}";
-                builder.Append(vars);
-                for (int j = vars.Length; j < one.Length + 2; j++)
+                foreach (string i in variables.Keys)
+                {
+                    string vars = $"||-{i} - {variables.GetValueOrDefault(i).ToString()}";
+                    builder.Append(vars);
+                    for (int j = vars.Length; j < one.Length + 2; j++)
+                    {
+                        builder.Append(" ");
+                    }
+                    builder.Append("||\n");
+                }
+                foreach (string i in double_variables.Keys)
+                {
+                    string vars = $"||-{i} - {this.double_variables.GetValueOrDefault(i).ToString()}";
+                    builder.Append(vars);
+                    for (int j = vars.Length; j < one.Length + 2; j++)
+                    {
+                        builder.Append(" ");
+                    }
+                    builder.Append("||\n");
+                }
+                foreach (string i in vector_variables.Keys)
+                {
+                    string vars = $"||-{i} - {vector_variables.GetValueOrDefault(i).ToString()}";
+                    builder.Append(vars);
+                    for (int j = vars.Length; j < one.Length + 2; j++)
+                    {
+                        builder.Append(" ");
+                    }
+                    builder.Append("||\n");
+                }
+                string three = "||Components number is " + components.Count.ToString();
+                builder.Append(three);
+                for (int i = three.Length; i < one.Length + 2; i++)
                 {
                     builder.Append(" ");
                 }
                 builder.Append("||\n");
-            }
-            foreach (string i in vector_variables.Keys)
-            {
-                string vars = $"||-{i} - {vector_variables.GetValueOrDefault(i).ToString()}";
-                builder.Append(vars);
-                for (int j = vars.Length; j < one.Length + 2; j++)
+                foreach (Component c in components)
                 {
-                    builder.Append(" ");
+                    string vars = $"||-{c.Component_name} - {(c.IsOneTimer ? "onetimer" : "repeatable")}";
+                    builder.Append(vars);
+                    for (int j = vars.Length; j < one.Length + 2; j++)
+                    {
+                        builder.Append(" ");
+                    }
+                    builder.Append("||\n");
                 }
-                builder.Append("||\n");
-            }
-            string three = "||Components number is " + components.Count.ToString();
-            builder.Append(three);
-            for (int i = three.Length; i < one.Length + 2; i++)
-            {
-                builder.Append(" ");
-            }
-            builder.Append("||\n");
-            foreach (Component c in components)
-            {
-                string vars = $"||-{c.Component_name} - {(c.IsOneTimer ? "onetimer" : "repeatable")}";
-                builder.Append(vars);
-                for (int j = vars.Length; j < one.Length + 2; j++)
+                for (int i = 0; i < one.Length + 4; i++)
                 {
-                    builder.Append(" ");
+                    builder.Append("-");
                 }
-                builder.Append("||\n");
+                return builder.ToString();
             }
-            for (int i = 0; i < one.Length + 4; i++)
+            catch
             {
-                builder.Append("-");
+                return null;
             }
-            return builder.ToString();
         }
 
         public event EventHandler onActivation;

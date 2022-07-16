@@ -10,6 +10,7 @@ namespace PhysicsLib.Phenomena
         private bool isInAction = false;
         private CancellationTokenSource ts = new CancellationTokenSource();
         private bool isOneTimer = false;
+        private int delta=0;
 
         public string Component_name { get => component_name; }
         public bool IsOneTimer { get => isOneTimer; }
@@ -69,23 +70,23 @@ namespace PhysicsLib.Phenomena
                 {
                     break;
                 }
+
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
+
                 Action();
                 if (ct.IsCancellationRequested)
                 {
                     break;
                 }
-                int sleep = obj.Milisec_delay;
                 sw.Stop();
-                sleep = Math.Max(0, obj.Milisec_delay - (int)sw.ElapsedMilliseconds);
+                int sleep = Math.Max(0, obj.Milisec_delay - (int)sw.ElapsedMilliseconds);
                 sw.Reset();
-                int i = 0;
+
                 sw.Start();
-
-                while (sw.ElapsedTicks < 10000 * (sleep-1)) { }
-
+                while (sw.ElapsedTicks < 10000 * (sleep-delta)) { }
                 sw.Stop();
+                delta = (int)Math.Ceiling(((delta + Math.Max(0, (int)sw.ElapsedMilliseconds - sleep))/(double)2));
                 Console.WriteLine(sleep + " - " + sw.ElapsedMilliseconds + "-" + component_name);
                 sw.Reset();
             }

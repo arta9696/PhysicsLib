@@ -22,16 +22,25 @@ namespace PhysicsLib.Phenomena.Dinamics
             {
                 double mass = value_mass;
                 MathVector SumForce = MathVector.Zero(card);
-                foreach (var i in obj.Vector_variables.Keys)
+                retry:;
+                try
                 {
-                    if (i.StartsWith("Force_"))
+                    foreach (var i in obj.Vector_variables.Keys)
                     {
-                        SumForce += obj.Vector_variables[i];
-                        obj.Vector_variables.Remove(i);
+                        if (i.StartsWith("Force_"))
+                        {
+                            SumForce += obj.Vector_variables[i];
+                            obj.Vector_variables.Remove(i);
+                        }
                     }
                 }
+                catch
+                {
+                    goto retry;
+                }
+                
 
-                obj.Vector_variables["Acceleration"] = SumForce / mass;
+                obj.Vector_variables["Acceleration_of_Forces"] = SumForce / mass;
             }
 
         }

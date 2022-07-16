@@ -18,13 +18,19 @@ namespace PhysicsLib.Phenomena.Kinematics
         protected override void Action()
         {
             MathVector? value_accel;
-            MathVector velocity;
+            MathVector velocity = MathVector.Zero(acceleration.Cardinality());
             if (obj.Vector_variables.TryGetValue("Acceleration", out value_accel) && obj.Vector_variables.TryGetValue("Velocity", out velocity))
             {
                 acceleration = value_accel;
                 velocity += acceleration * (0.001 * obj.Milisec_delay);
-                obj.Vector_variables["Velocity"] = velocity;
+                
             }
+            if (obj.Vector_variables.TryGetValue("Acceleration_of_Forces", out value_accel) && obj.Vector_variables.TryGetValue("Velocity", out velocity))
+            {
+                acceleration = value_accel;
+                velocity += acceleration * (0.001 * obj.Milisec_delay);
+            }
+            obj.Vector_variables["Velocity"] = velocity;
         }
 
         protected override void SupportAddAction()
