@@ -16,6 +16,8 @@ namespace PhysicsLib.Objects
         public Wall_easy(string object_name, int milisec_delay, double size, List<PsObject> objectPool, MathVector firstPoint, MathVector secondPoint) : base(object_name, milisec_delay, objectPool)
         {
             first = firstPoint; second = secondPoint; this.objectPool = objectPool; Double_variables.Add("Size", size);
+            Vector_variables.Add("firstPoint", firstPoint);
+            Vector_variables.Add("secondPoint", secondPoint);
             parallel = second - first;
         }
         public new void Activate()
