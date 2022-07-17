@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PhysicsLib.Phenomena
 {
-    internal class Size_Round : Component
+    public class Size_Round : Component
     {
         double size;
         public Size_Round(double size) : base(true)
