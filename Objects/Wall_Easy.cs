@@ -70,7 +70,7 @@ namespace PhysicsLib.Objects
             foreach (var ob in objectPool)
             {
                 var third = ob.Vector_variables["Position"];
-                var forth = third + ob.Vector_variables["Velocity"];
+                var forth = third + (ob.Vector_variables["Velocity"]/ob.Milisec_delay);
 
                 if ((first[0] - second[0]) * (third[1] - forth[1])- (first[1] - second[1]) * (third[0] - forth[0]) == 0)
                 {

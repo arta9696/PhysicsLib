@@ -61,7 +61,7 @@ namespace PhysicsLib.Objects
         }
         public static MathVector operator -(MathVector a, MathVector b)
         {
-            if (a.Cardinality != b.Cardinality)
+            if (a.Cardinality() != b.Cardinality())
             {
                 throw new ArgumentException("Vectors must be of equal cardinality");
             }
@@ -133,7 +133,7 @@ namespace PhysicsLib.Objects
         }
         public static double operator *(MathVector a, MathVector b)
         {
-            if (a.Cardinality != b.Cardinality)
+            if (a.Cardinality() != b.Cardinality())
             {
                 throw new ArgumentException("Vectors must be of equal cardinality");
             }
@@ -153,7 +153,7 @@ namespace PhysicsLib.Objects
         //    }
         //    foreach (var v in a)
         //    {
-        //        if (v.Cardinality != a[0].Cardinality)
+        //        if (v.Cardinality() != a[0].Cardinality())
         //        {
         //            throw new ArgumentException("Vectors must be of equal cardinality");
         //        }
@@ -191,7 +191,7 @@ namespace PhysicsLib.Objects
         }
         public static double operator ^(MathVector a, MathVector b)
         {
-            if (a.Cardinality != b.Cardinality)
+            if (a.Cardinality() != b.Cardinality())
             {
                 throw new ArgumentException("Vectors must be of equal cardinality");
             }
