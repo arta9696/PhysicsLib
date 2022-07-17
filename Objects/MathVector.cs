@@ -145,42 +145,42 @@ namespace PhysicsLib.Objects
             }
             return value;
         }
-        public static MathVector VectorMulti(params MathVector[] a)
-        {
-            if (a.Length - 1 != a[0].Length())
-            {
-                throw new ArgumentException("Vectors amount must be one less than length of a vector");
-            }
-            foreach (var v in a)
-            {
-                if (v.Cardinality != a[0].Cardinality)
-                {
-                    throw new ArgumentException("Vectors must be of equal cardinality");
-                }
-            }
+        //public static MathVector VectorMulti(params MathVector[] a)
+        //{
+        //    if (a.Length - 1 != a[0].Length())
+        //    {
+        //        throw new ArgumentException("Vectors amount must be one less than length of a vector");
+        //    }
+        //    foreach (var v in a)
+        //    {
+        //        if (v.Cardinality != a[0].Cardinality)
+        //        {
+        //            throw new ArgumentException("Vectors must be of equal cardinality");
+        //        }
+        //    }
 
-            int n = a[0].Cardinality();
-            MathVector[] b = (MathVector[])a.Reverse();
-            double[] values = new double[n];
-            for (int i = 0; i < n; i++)
-            {
-                double to_add = 1;
-                double to_subtract = 1;
-                for (int k = 0; k < n - 1; k++)
-                {
-                    int position = i + k + 1;
-                    if (position == n)
-                    {
-                        position -= n;
-                    }
-                    to_add *= a[k][position];
-                    to_subtract *= b[k][position];
-                }
+        //    int n = a[0].Cardinality();
+        //    MathVector[] b = (MathVector[])a.Reverse();
+        //    double[] values = new double[n];
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        double to_add = 1;
+        //        double to_subtract = 1;
+        //        for (int k = 0; k < n - 1; k++)
+        //        {
+        //            int position = i + k + 1;
+        //            if (position == n)
+        //            {
+        //                position -= n;
+        //            }
+        //            to_add *= a[k][position];
+        //            to_subtract *= b[k][position];
+        //        }
 
-                values[i] = to_add - to_subtract;
-            }
-            return new MathVector(values);
-        }
+        //        values[i] = to_add - to_subtract;
+        //    }
+        //    return new MathVector(values);
+        //}
         public static double Angle(MathVector a, MathVector b)
         {
             return a ^ b;

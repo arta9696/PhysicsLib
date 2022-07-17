@@ -32,7 +32,7 @@ namespace PhysicsLib.Objects
         public new void Activate()
         {
             wallObjects = new PsObject[(int)parallel.Length()];
-            for (int i = 0; i < parallel.Length(); i++)
+            for (int i = 0; i+1 < parallel.Length(); i++)
             {
                 wallObjects[i] = new PsObject(Object_name + i, Milisec_delay, objectPool);
                 wallObjects[i].AddComponent(new Mass(double.PositiveInfinity));
@@ -42,6 +42,7 @@ namespace PhysicsLib.Objects
                 wallObjects[i].AddComponent(new Friction_Coeff(friction_of_wall));
             }
             objectPool.AddRange(wallObjects);
+            objectPool.Remove(this);
         }
         public new void Disactivate()
         {
