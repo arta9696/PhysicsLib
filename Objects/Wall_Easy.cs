@@ -10,17 +10,17 @@ namespace PhysicsLib.Objects
     public class Wall_easy : PsObject
     {
         MathVector first, second, parallel;
-        double size;
         private int delta = 0;
         private CancellationTokenSource ts = new CancellationTokenSource();
         List<PsObject> objectPool;
         public Wall_easy(string object_name, int milisec_delay, double size, List<PsObject> objectPool, MathVector firstPoint, MathVector secondPoint) : base(object_name, milisec_delay, objectPool)
         {
-            first = firstPoint; second = secondPoint; this.objectPool = objectPool; this.size = size;
+            first = firstPoint; second = secondPoint; this.objectPool = objectPool; Double_variables.Add("Size", size);
             parallel = second - first;
         }
         public new void Activate()
         {
+            objectPool.Remove(this);
             Thread mt = new Thread(() => ThreadInsider());
             mt.Name = Object_name;
             mt.IsBackground = true;
