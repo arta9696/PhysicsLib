@@ -21,6 +21,8 @@ namespace PhysicsLib.Objects
         {
             first = firstPoint;
             second = secondPoint;
+            Vector_variables.Add("firstPoint", firstPoint);
+            Vector_variables.Add("secondPoint", secondPoint);
             parallel = second - first;
             this.objectPool = objectPool;
             this.size = size;
